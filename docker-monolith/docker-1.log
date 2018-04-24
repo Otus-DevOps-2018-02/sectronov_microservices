@@ -1,0 +1,19 @@
+REPOSITORY                  TAG                 IMAGE ID            CREATED             SIZE
+sectronov/ubuntu-tmp-file   latest              921e91b6219e        39 seconds ago      113MB
+ubuntu                      16.04               c9d990395902        12 days ago         113MB
+hello-world                 latest              e38bc07ac18e        13 days ago         1.85kB
+
+Разница между контейнером и образом
+
+Контейнер имеет:
+- стейт (State)
+- параметры кофигурации сети (NetworkSettings)
+- точки монтирования (Mounts)
+- конфигурацию хоста (HostConfig)
+- ссылку на образ (Image)
+
+Образ:
+- слои файловой системы (RootFS)
+- кофигурацию контейнера (ContainerConfig)
+- ID родителя (Parent)
+- ID контейенра (Container)
