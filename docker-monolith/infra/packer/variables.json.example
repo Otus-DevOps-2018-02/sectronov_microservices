@@ -1,0 +1,9 @@
+{
+    "project_id": "docker-202320",
+    "source_image_family": "ubuntu-1604-lts",
+    "machine_type": "f1-micro",
+    "disk_type": "pd-standard",
+    "disk_size": "10",
+    "network": "default",
+    "zone": "europe-west1-d"
+}

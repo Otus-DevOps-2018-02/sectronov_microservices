@@ -1,0 +1,15 @@
+---
+
+- name: Deploy 
+  hosts: tag_docker-app
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Deploy container
+      docker_container:
+        name: reddit
+        image: sectronov/otus-reddit:1.0
+        state: started
+        ports:
+          - "9292:9292"
