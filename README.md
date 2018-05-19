@@ -61,3 +61,24 @@ docker-machine create --driver google \
 - `terraform` — конфиги для создания инстансы в `GCE`
 - `ansible` — плейбуки для установки `docker` и деплоя образа с приложением внутри. Хосты конфигурируются динамически через `gce.py`
 - `packer` — билд образа `ubuntu` с `docker` внутри, в качестве `provision` используется плейбук `ansible/playbooks/install-docker.yml`
+
+## Homework 15: Docker образы. Микросервисы 
+
+- Приложение разбито на компоненты: `post-py`, `comment`, `ui`
+- Для каждого компонента создан и оптимизирован `Dockerfile`
+- Использован `Docker linter` [hadolint](https://github.com/hadolint/hadolint)
+- Для взаимодействия контейнеров по сети создан `network bridge`
+- К контейнеру с `MongoDB` подключен `volume` для сохранения данных на диске
+
+Команды:
+
+- `docker build -t sectronov/post:1.0 ./post-py`
+- `docker build -t sectronov/comment:1.0 ./comment`
+- `docker build -t sectronov/ui:1.0 ./ui`
+- `docker network create reddit`
+- `docker run -d --network=reddit --network-alias=post_db --network-alias=comment_db -v reddit_db:/data/db mongo:latest`
+- `docker run -d --network=reddit --network-alias=post sectronov/post:1.0`
+- `docker run -d --network=reddit --network-alias=comment sectronov/comment:1.0`
+- `docker run -d --network=reddit -p 9292:9292 sectronov/ui:1.0`
+- `docker kill $(docker ps -q)`
+- `docker volume create reddit_db`
